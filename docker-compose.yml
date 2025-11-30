@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  privacy-policy-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PORT: $PORT
+    container_name: privacy-policy-app
+    ports:
+      - "$PORT:$PORT"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./public:/usr/src/app/public
+      - ./views:/usr/src/app/views
+    restart: unless-stopped
+    networks:
+      - privacy-app-network
+    command: ["npm", "run", "start"]
+
+networks:
+  privacy-app-network:
+    driver: bridge
+
+volumes:
+  app-data:
+    driver: local
