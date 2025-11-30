@@ -12,8 +12,5 @@ services:
       - "$PORT:$PORT"
     environment:
       - PORT=$PORT
-    volumes:
-      - ./public:/usr/src/app/public
-      - ./views:/usr/src/app/views
     restart: unless-stopped
     command: ["npm", "run", "start"]
